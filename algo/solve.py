@@ -2,12 +2,14 @@ def solve(word_list, target):
     if len(word_list) == 0:
         return None
 
+    target_length = len(target)
     answer = None
+
     for i in range(len(word_list)):
-        if len(word_list[i]) >= len(target):
+        if len(word_list[i]) >= target_length:
             continue
         for j in range(i+1, len(word_list)):
-            if len(word_list[j]) >= len(target):
+            if len(word_list[j]) >= target_length:
                 continue
             if word_list[i] + word_list[j] == target:
                 answer = (word_list[i], word_list[j])
