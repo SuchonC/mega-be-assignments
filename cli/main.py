@@ -49,7 +49,8 @@ def watch_tx(contract_address):
 @click.argument('n', type=int)
 @click.argument('contract_address', type=str)
 def latest_tx(n, contract_address):
-    pass
+    functions.is_valid_erc_20(contract_address)
+    functions.latest_tx(n, contract_address)
 
 
 @cli.command()
