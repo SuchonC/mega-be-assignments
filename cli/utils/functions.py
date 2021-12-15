@@ -130,8 +130,12 @@ def get_contract_detail(contract_address):
 
 def get_balance_of(contract_address, target_address):
     contract_address = contract_address.lower()
+    target_address = target_address.lower()
+    target_address = Web3.toChecksumAddress(target_address)
     contract = get_contract_object(contract_address)
-    return contract.functions.balanceOf(target_address).call()
+    decimals = get_contract_detail(contract_address)['decimals']
+    balance = contract.functions.balanceOf(target_address).call()
+    return balance / (10 ** decimals)
 
 
 def watch_tx(contract_address):
