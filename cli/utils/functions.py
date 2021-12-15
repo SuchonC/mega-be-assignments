@@ -143,10 +143,8 @@ def watch_tx(contract_address):
     def log_loop(event_filter, interval):
         while True:
             for event in event_filter.get_new_entries():
-                receipt = w3.eth.wait_for_transaction_receipt(
-                    event['transactionHash'])
                 click.echo(
-                    f'{ETHER_SCAN_URL}/tx/{receipt["transactionHash"].hex()}')
+                    f'{ETHER_SCAN_URL}/tx/{event["transactionHash"].hex()}')
             if thread_stop_flag:
                 break
             time.sleep(interval)
@@ -169,7 +167,8 @@ def watch_tx(contract_address):
     log_thread.start()
     watch_thread.start()
 
-    click.echo('Press "q" follow by an "enter" to abort')
+    click.echo('The program will keep printing links to etherscan.io')
+    click.echo('Press "q + ENTER" to abort')
     while True:
         if input().lower() == 'q':
             click.echo('Aborting')
