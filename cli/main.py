@@ -41,7 +41,8 @@ def balance_of(contract_address, target_address):
 @cli.command()
 @click.argument('contract_address', type=str)
 def watch_tx(contract_address):
-    pass
+    functions.is_valid_erc_20(contract_address)
+    functions.watch_tx(contract_address)
 
 
 @cli.command()

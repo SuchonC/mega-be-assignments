@@ -1,3 +1,4 @@
+import time
 import click
 import json
 import requests
@@ -5,6 +6,7 @@ import os
 from web3 import Web3, exceptions as web3_exceptions
 
 ETHER_SCAN_MAINNET_URL = 'https://api.etherscan.io'
+ETHER_SCAN_URL = 'https://etherscan.io'
 ETHER_SCAN_API_KEY = os.getenv('ETHER_SCAN_API_KEY')
 w3 = Web3(Web3.WebsocketProvider(os.getenv('ETHER_NODE_WEBSOCKET_URL')))
 
@@ -31,6 +33,13 @@ def get_abi(contract_address):
         exit()
 
     return response['result']
+
+
+def get_contract_object(contract_address):
+    contract_address = contract_address.lower()
+    abi = get_abi(contract_address)
+    checksum_address = Web3.toChecksumAddress(contract_address)
+    return w3.eth.contract(abi=abi, address=checksum_address)
 
 
 def is_valid_erc_20(contract_address):
@@ -93,9 +102,7 @@ def is_valid_erc_20(contract_address):
 
 def get_contract_detail(contract_address):
     contract_address = contract_address.lower()
-    abi = get_abi(contract_address)
-    checksum_address = Web3.toChecksumAddress(contract_address)
-    contract = w3.eth.contract(abi=abi, address=checksum_address)
+    contract = get_contract_object(contract_address)
 
     try:
         name = contract.functions.name().call()
@@ -121,7 +128,22 @@ def get_contract_detail(contract_address):
 
 def get_balance_of(contract_address, target_address):
     contract_address = contract_address.lower()
-    abi = get_abi(contract_address)
-    checksum_address = Web3.toChecksumAddress(contract_address)
-    contract = w3.eth.contract(abi=abi, address=checksum_address)
+    contract = get_contract_object(contract_address)
     return contract.functions.balanceOf(target_address).call()
+
+
+def watch_tx(contract_address):
+    contract_address = contract_address.lower()
+    checksum_address = Web3.toChecksumAddress(contract_address)
+
+    def log_loop(event_filter, interval):
+        while True:
+            for event in event_filter.get_new_entries():
+                receipt = w3.eth.wait_for_transaction_receipt(event['transactionHash'])
+                click.echo(f'{ETHER_SCAN_URL}/tx/{receipt["transactionHash"].hex()}')
+            time.sleep(interval)
+            click.echo('sleep')
+
+    block_filter = w3.eth.filter(
+        {'fromBlock': 'latest', 'address': checksum_address})
+    log_loop(block_filter, 2)
