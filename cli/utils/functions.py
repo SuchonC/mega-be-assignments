@@ -229,13 +229,15 @@ def latest_tx(n, contract_address):
     def save_tx_info_to_file(idx, info, n):
         with open(f'latest_{n}_transactions.txt', 'a') as file:
             file.write(f'No. {idx}\n')
-            file.write(f'Transaction hash : {info["transaction"]["hash"].hex()}\n')
+            file.write(
+                f'Transaction hash : {info["transaction"]["hash"].hex()}\n')
             file.write(f'Sender address : {info["transaction"]["from"]}\n')
             if 'function_name' not in info['info']:
                 file.write(f'Cannot decode function data : {info["info"]}\n')
             else:
                 file.write(f'Call data\n')
-                file.write(f'   -> Function : {info["info"]["function_name"]}\n')
+                file.write(
+                    f'   -> Function : {info["info"]["function_name"]}\n')
                 for arg in info['info']['args']:
                     file.write(f'   -> {arg} : {info["info"]["args"][arg]}\n')
             file.write('\n\n')
