@@ -1,9 +1,9 @@
 import click
 import os
+from utils import functions
 
-from click import utils
-import utils
 # TODO: create a setup.py
+# !! need to be in 'cli' folder before executing main.py (because of file opening is relative to CWD)
 
 
 @click.group()
@@ -19,7 +19,8 @@ def cli():
 @cli.command()
 @click.argument('contract_address', type=str)
 def detail(contract_address):
-    details = utils.get_contract_detail(contract_address)
+    functions.is_valid_erc_20(contract_address)
+    details = functions.get_contract_detail(contract_address)
     click.echo(
         f'Name : {details["name"] if details["name"] is not None else "Function name() is not implemented"}')
     click.echo(
@@ -32,7 +33,9 @@ def detail(contract_address):
 @click.argument('contract_address', type=str)
 @click.argument('target_address', type=str)
 def balance_of(contract_address, target_address):
-    utils.get_balance_of(contract_address, target_address)
+    functions.is_valid_erc_20(contract_address)
+    balance = functions.get_balance_of(contract_address, target_address)
+    click.echo(f'Balance : {balance}')
 
 
 @cli.command()
