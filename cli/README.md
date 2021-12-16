@@ -22,7 +22,7 @@ You can get one by heading to [etherscan.io](https://etherscan.io/) and create a
 
 ***Python Version***
 
-Python 3.0+ is preferred, this program was tested on Python 3.88 and 3.7.4
+Python 3.0+ is preferred, this program was tested on Python 3.8.8 and 3.7.4
 
 ---
 
