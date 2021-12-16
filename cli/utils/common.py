@@ -10,10 +10,8 @@ ETHER_SCAN_API_KEY = os.getenv('ETHER_SCAN_API_KEY')
 ETHER_NODE_WEBSOCKET_URL = os.getenv('ETHER_NODE_WEBSOCKET_URL')
 ETHER_NODE_HTTP_URL = os.getenv('ETHER_NODE_HTTP_URL')
 
-if ETHER_NODE_WEBSOCKET_URL is not None:
-    w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL))
-elif ETHER_NODE_HTTP_URL is not None:
-    w3 = Web3(Web3.HTTPProvider(ETHER_NODE_HTTP_URL))
+w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL)
+          ) if ETHER_NODE_WEBSOCKET_URL is not None else Web3(Web3.HTTPProvider(ETHER_NODE_HTTP_URL))
 
 
 def get_abi(contract_address):
