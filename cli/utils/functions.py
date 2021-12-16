@@ -199,9 +199,10 @@ def latest_tx(n, contract_address):
         checksum_address = Web3.toChecksumAddress(contract_address)
         transactions = []  # contain transaction hex
         block_id = w3.eth.get_block('latest')['number']
+        block_interval = 50 if 50 < block_id else 0
         while len(transactions) < n:
             filter = w3.eth.filter(
-                {'fromBlock': block_id, 'toBlock': block_id, 'address': checksum_address})
+                {'fromBlock': block_id-block_interval, 'toBlock': block_id, 'address': checksum_address})
             logs = w3.eth.get_filter_logs(filter.filter_id)
             logs.reverse()
 
@@ -214,7 +215,9 @@ def latest_tx(n, contract_address):
                 for l in logs[:empty_space]:
                     transactions.append(l['transactionHash'])
 
-            block_id -= 1
+            block_id -= block_interval + 1
+            if block_id < 0:
+                break
         return transactions
 
     def get_tx_info(tx_hash):
