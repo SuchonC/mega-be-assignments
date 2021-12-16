@@ -14,8 +14,6 @@ if ETHER_NODE_WEBSOCKET_URL is not None:
     w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL))
 elif ETHER_NODE_HTTP_URL is not None:
     w3 = Web3(Web3.HTTPProvider(ETHER_NODE_HTTP_URL))
-else:
-    click.echo('Error: cannot find Ethereum node\'s endpoint')
 
 
 def get_abi(contract_address):
