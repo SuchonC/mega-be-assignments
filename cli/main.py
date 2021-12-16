@@ -20,7 +20,7 @@ def cli():
     A CLI program for accessing some functionalities of Ethereum block chain.
     This program requires a URL endpoint to a running Ethereum node
     It also uses etherscan's API to retrieve contracts' ABI
-    
+
     \b
     Where to set Ethereum node's endpoint?
      - For HTTP endpoint -> ETHER_NODE_HTTP_URL variable
@@ -33,12 +33,14 @@ def cli():
     """
     web_socket_url = os.getenv('ETHER_NODE_WEBSOCKET_URL')
     http_url = os.getenv('ETHER_NODE_HTTP_URL')
+    ether_scan_api_key = os.getenv('ETHER_SCAN_API_KEY')
     if web_socket_url is None and http_url is None:
         click.echo(
             'Either ETHER_NODE_WEBSOCKET_URL or ETHER_NODE_HTTP_URL environment variable needs to be set')
+        exit(1)
+    if ether_scan_api_key is None:
         click.echo(
             '[OPTIONAL] ETHER_SCAN_API_KEY can also be set to provide higher rate limits')
-        exit(1)
 
 
 @cli.command()
