@@ -10,14 +10,12 @@ ETHER_SCAN_API_KEY = os.getenv('ETHER_SCAN_API_KEY')
 ETHER_NODE_WEBSOCKET_URL = os.getenv('ETHER_NODE_WEBSOCKET_URL')
 ETHER_NODE_HTTP_URL = os.getenv('ETHER_NODE_HTTP_URL')
 
-if ETHER_NODE_WEBSOCKET_URL is not None and ETHER_NODE_HTTP_URL is not None:
-    # if both env are set, choose websocket
+if ETHER_NODE_WEBSOCKET_URL is not None:
     w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL))
-elif ETHER_NODE_WEBSOCKET_URL is not None:
-    w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL))
+elif ETHER_NODE_HTTP_URL is not None:
+    w3 = Web3(Web3.HTTPProvider(ETHER_NODE_HTTP_URL))
 else:
-    # at least one must be set other wise program will exit since main.py
-    w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_HTTP_URL))
+    click.echo('Error: cannot find Ethereum node\'s endpoint')
 
 
 def get_abi(contract_address):
