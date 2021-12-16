@@ -23,9 +23,8 @@ def get_holders(n, contract_address):
     def save_to_file(data, filename='top_n_holders.txt'):
         with open(filename, 'a') as file:
             for d in data:
-                file.write(f'\
-{d["rank"]}. Holder address : {d["holder_address"]}\n\
-{" "*(len(d["rank"])+2)}Balance        : {d["balance"]} {d["symbol"]}\n\n')  # formatted this way for better readability in the output file
+                file.write(f'{d["rank"]}. Holder address : {d["holder_address"]}\n')
+                file.write(f'{" "*(len(d["rank"])+1)} Balance        : {d["balance"]} {d["symbol"]}\n\n')
 
     soup = bs(data, 'html.parser')
     rows = soup.find_all('tr')
