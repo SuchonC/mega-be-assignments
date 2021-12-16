@@ -41,9 +41,8 @@ Install all the dependencies
 pip install -r requirements.txt
 ```
 
-Note :
-
-If you are using Windows you may encounter a _"Microsoft visual c++ 14.0 or greater is required"_ error, you can follow a link [here](https://exerror.com/error-microsoft-visual-c-14-0-is-required-get-it-with-microsoft-visual-c-build-tools/) to fix the error
+>Note :
+>If you are using Windows you may encounter a _"Microsoft visual c++ 14.0 or greater is required"_ error, you can follow a link [here](https://exerror.com/error-microsoft-visual-c-14-0-is-required-get-it-with-microsoft-visual-c-build-tools/) to fix the error
 
 Next, put your Ethereum node URL and Etherscan API key in environment variables
 
