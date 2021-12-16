@@ -19,17 +19,22 @@ def cli():
     \b
     A CLI program for accessing some functionalities of Ethereum block chain.
     This program requires a URL endpoint to a running Ethereum node
-    It also uses etherscan's API to retrieve contracts' ABI
+    It also requires etherscan's API to retrieve contracts' ABI
 
     \b
     Where to set Ethereum node's endpoint?
-     - For HTTP endpoint -> ETHER_NODE_HTTP_URL variable
-     - For Websocket endpoint -> ETHER_NODE_WEBSOCKET_URL variable
+     - For HTTP endpoint -> ETHER_NODE_HTTP_URL environment variable
+     - For Websocket endpoint -> ETHER_NODE_WEBSOCKET_URL evironment variable
      - You must set at least one of these variables, if both are set, Websocket URL will be used
 
     \b
-    Where to set etherscan's API KEY? [OPTIONAL]
+    Where to set etherscan's API KEY?
      - ETHER_SCAN_API_KEY
+
+    \b
+    Examples for Infura Ethereum node
+     - export ETHER_NODE_HTTP_URL=https://mainnet.infura.io/v3/xxxx
+     - export ETHER_SCAN_API_KEY=xxxxxxxxxxxxxxxxxx
     """
     web_socket_url = os.getenv('ETHER_NODE_WEBSOCKET_URL')
     http_url = os.getenv('ETHER_NODE_HTTP_URL')
@@ -40,14 +45,15 @@ def cli():
         exit(1)
     if ether_scan_api_key is None:
         click.echo(
-            '[OPTIONAL] ETHER_SCAN_API_KEY can also be set to provide higher rate limits')
+            'ETHER_SCAN_API_KEY must be set')
+        exit(1)
 
 
 @cli.command()
 @click.argument('contract_address', type=str)
 def detail(contract_address):
     """
-    Get name, symbol and decimals
+    Get name, symbol and decimals of a contract
     """
     is_valid_erc_20(contract_address)
     details = get_contract_detail(contract_address)
@@ -64,7 +70,7 @@ def detail(contract_address):
 @click.argument('target_address', type=str)
 def balance_of(contract_address, target_address):
     """
-    Get total balance of target address
+    Get total balance of target address in a contract
     """
     is_valid_erc_20(contract_address)
     balance = get_balance_of(contract_address, target_address)
@@ -75,7 +81,7 @@ def balance_of(contract_address, target_address):
 @click.argument('contract_address', type=str)
 def watch_tx(contract_address):
     """
-    Watch transactions
+    Watch for new transactions in a contract
     """
     is_valid_erc_20(contract_address)
     keep_watch_tx(contract_address)
@@ -86,7 +92,7 @@ def watch_tx(contract_address):
 @click.argument('contract_address', type=str)
 def latest_tx(n, contract_address):
     """
-    Get latest N transactions
+    Get latest N transactions of a contract
     """
     is_valid_erc_20(contract_address)
     get_latest_tx(n, contract_address)
@@ -97,7 +103,7 @@ def latest_tx(n, contract_address):
 @click.argument('contract_address', type=str)
 def holders(n, contract_address):
     """
-    Get top N holders
+    Get top N holders of a contract
     """
     is_valid_erc_20(contract_address)
     get_holders(n, contract_address)

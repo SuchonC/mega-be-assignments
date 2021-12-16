@@ -39,7 +39,7 @@ def keep_watch_tx(contract_address):
     log_thread.start()
     watch_thread.start()
 
-    click.echo('The program will keep printing links to etherscan.io')
+    click.echo('The program will keep printing links of new transactions to etherscan.io')
     click.echo('Press "q + ENTER" to abort')
     while True:
         if input().lower() == 'q':
