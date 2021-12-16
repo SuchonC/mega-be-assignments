@@ -3,3 +3,4 @@ click
 colorama
 web3
 requests
+beautifulsoup4
