@@ -3,6 +3,7 @@ import os
 from utils import functions
 
 # TODO: create a setup.py
+# TODO: add loading status in latest-tx function
 # !! need to be in 'cli' folder before executing main.py (because of file opening is relative to CWD)
 
 
