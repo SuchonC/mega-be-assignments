@@ -5,7 +5,7 @@ from utils.functions.balance_of import get_balance_of
 from utils.functions.watch_tx import keep_watch_tx
 from utils.functions.latest_tx import get_latest_tx
 from utils.functions.holders import get_holders
-from utils.common import is_valid_erc_20
+from utils.common import is_valid_erc_20, verify_node_url
 
 # TODO: create a setup.py
 # TODO: add loading status in latest-tx function
@@ -47,6 +47,7 @@ def cli():
         click.echo(
             'ETHER_SCAN_API_KEY must be set')
         exit(1)
+    verify_node_url()
 
 
 @cli.command()

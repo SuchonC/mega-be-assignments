@@ -14,6 +14,15 @@ w3 = Web3(Web3.WebsocketProvider(ETHER_NODE_WEBSOCKET_URL)
           ) if ETHER_NODE_WEBSOCKET_URL is not None else Web3(Web3.HTTPProvider(ETHER_NODE_HTTP_URL))
 
 
+def verify_node_url():
+    try:
+        w3.eth.get_block('latest')
+    except Exception as e:
+        click.echo(e)
+        click.echo('Your Ethereum node\'s URL may be invalid, please recheck.')
+        exit(1)
+
+
 def get_abi(contract_address):
     payload = {
         'module': 'contract',
