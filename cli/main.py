@@ -36,7 +36,7 @@ def detail(contract_address):
 def balance_of(contract_address, target_address):
     functions.is_valid_erc_20(contract_address)
     balance = functions.get_balance_of(contract_address, target_address)
-    click.echo(f'Balance : {balance}')
+    click.echo(f'Balance : {balance["balance"]} {balance["symbol"]}')
 
 
 @cli.command()
@@ -58,7 +58,8 @@ def latest_tx(n, contract_address):
 @click.argument('n', type=int)
 @click.argument('contract_address', type=str)
 def holders(n, contract_address):
-    pass
+    functions.is_valid_erc_20(contract_address)
+    functions.holders(n, contract_address)
 
 
 if __name__ == "__main__":
