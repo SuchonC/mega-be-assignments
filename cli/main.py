@@ -4,6 +4,7 @@ from utils import functions
 
 # TODO: create a setup.py
 # TODO: add loading status in latest-tx function
+# !! require Microsoft Visual C++ 14.00 and newer for windows
 # !! need to be in 'cli' folder before executing main.py (because of file opening is relative to CWD)
 
 
