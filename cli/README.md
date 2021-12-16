@@ -32,7 +32,7 @@ Clone this repository to your local machine
 
 ``` sh
 git clone https://github.com/SuchonC/mega-be-assignments.git
-cd ./mega-be-assignments
+cd ./mega-be-assignments/cli
 ```
 
 Install all the dependencies
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 Note :
 
-If you are using Windows you may encounter a "Microsoft visual c++ 14.0 or greater is required" error, you can follow a link [here](https://exerror.com/error-microsoft-visual-c-14-0-is-required-get-it-with-microsoft-visual-c-build-tools/) to fix the error
+If you are using Windows you may encounter a _"Microsoft visual c++ 14.0 or greater is required"_ error, you can follow a link [here](https://exerror.com/error-microsoft-visual-c-14-0-is-required-get-it-with-microsoft-visual-c-build-tools/) to fix the error
 
 Next, put your Ethereum node URL and Etherscan API key in environment variables
 
@@ -68,7 +68,7 @@ The output should be similar to the below
 ```txt
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
-  ...
+  ... REDACTED ...
 
 Options:
   --help  Show this message and exit.
@@ -79,4 +79,18 @@ Commands:
   holders     Get top N holders of a contract
   latest-tx   Get latest N transactions of a contract
   watch-tx    Watch for new transactions in a contract
+```
+
+An example of getting BNB's contract detail
+
+```sh
+python main.py detail 0xB8c77482e45F1F44dE1745F52C74426C631bDD52
+```
+
+The output is as follow
+
+```
+Name : BNB
+Symbol : BNB
+Decimals : 18
 ```
