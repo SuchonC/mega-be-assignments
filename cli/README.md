@@ -10,17 +10,17 @@ It also uses etherscan's API to retrieve contracts' ABI
 
 ## Requirements
 
-***Ethereum node URL***
+### Ethereum node URL
 
 You can either launch your own Ethereum node or use a public node for development purpose such as [Infura](https://infura.io/)
 
-***API key of etherscan.io***
+### API key of etherscan.io
 
 This program needs this API key to be able to obtain contrains' ABI and function properly.
     
 You can get one by heading to [etherscan.io](https://etherscan.io/) and create a free account, from then you will have access to the API key
 
-***Python Version***
+### Python version
 
 Python 3.0+ is preferred, this program was tested on Python 3.8.8 and 3.7.4
 
