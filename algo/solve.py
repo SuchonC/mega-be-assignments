@@ -16,8 +16,8 @@ def solve(word_list, target):
             # else mark the head as found
             found[w] = True
         # if w is the tail of the target
-        elif w == target[len(w):]:
-            head = target[:len(w)]
+        elif w == target[-len(w):]:
+            head = target[:-len(w)]
             # if its head is already found, then return
             if head in found:
                 return (head, w)
