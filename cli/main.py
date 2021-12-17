@@ -75,7 +75,7 @@ def balance_of(contract_address, target_address):
     """
     is_valid_erc_20(contract_address)
     balance = get_balance_of(contract_address, target_address)
-    click.echo(f'Balance : {balance["balance"]} {balance["symbol"]}')
+    click.echo(f'Balance : {balance["balance"]:,} {balance["symbol"]}')
 
 
 @cli.command()
