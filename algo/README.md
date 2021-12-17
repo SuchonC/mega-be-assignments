@@ -18,9 +18,11 @@ python solve.py
 The program will then prompt for input words and target word
 
 ```txt
-Type input words separated by space (ie. ab bc cd): ab bc cd
-Type the target word: abcd
-Answer: ('ab', 'cd')
+How many input words ? : 2   
+Enter word #1 : ab
+Enter word #2 : bc
+Enter the target word : abbc
+Answer : ('ab', 'bc')
 ```
 
 ## How the algorithm works
@@ -56,3 +58,24 @@ return None
 ```
 
 ## Complexity Analysis
+
+### Time Complexity
+
+Let _n_ be the length of the input word list
+
+For each word in the list, at most one dictionary look up will occur and its _O(1)_ for each look up
+
+So the time complexity is **O(n)**
+
+### Space Complexity
+
+Let _n_ be the length of the inport word list
+
+In the worst case where no solution pair exists but each word is always either a head or a tail portion of the target word, the found dictionary will have _n_ keys, that's _O(n)_
+
+And in average case, the dictionary keys still grows by the order of n, that's also _O(n)_
+
+Combined with the space of input list _O(n)_
+
+So the space complexity is also **O(n)**
+
