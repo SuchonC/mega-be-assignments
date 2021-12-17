@@ -28,10 +28,10 @@ def solve(word_list, target):
 
 
 def main():
-    word_list = input('Type input words separated by space (ie. ab bc cd): ')
-    target = input('Type the target word: ')
-    print('Answer:', solve(word_list.split(), target))
-
+    n = int(input('How many input words ? : '))
+    word_list = [input(f'Enter word #{i} : ') for i in range(1, n+1)]
+    target_word = input('Enter the target word : ')
+    print('Answer :', solve(word_list, target_word))
 
 if __name__ == '__main__':
     main()
