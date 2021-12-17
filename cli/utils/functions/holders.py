@@ -38,4 +38,6 @@ def get_holders(n, contract_address):
             'balance': tds[2].string,
             'symbol': details['symbol']
         })
+    click.echo('Creating output file . . .')
     save_to_file(data, filename=f'top_{n}_holders_of_{details["name"]}.txt')
+    click.echo('Output file is created')

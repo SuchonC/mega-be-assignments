@@ -71,8 +71,12 @@ def get_latest_tx(n, contract_address):
 
     tx_hashes = get_latest_n_tx_hashes(n, contract_address)
 
+    click.echo('Creating output file . . .')
+
     idx = 1
     for tx_hash in tx_hashes:
         info = get_tx_info(tx_hash)
         save_tx_info_to_file(idx, info, n)
         idx += 1
+
+    click.echo('Output file is created')
