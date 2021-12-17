@@ -111,6 +111,8 @@ def is_valid_erc_20(contract_address, strict=False):
                         exit(1)
             func_found = True
         if not func_found:
-            click.echo(f'{func_a["type"]} {func_a["name"]} is not implemented')
+            if func_a['name'] == 'name' and not strict:
+                continue
+            click.echo(f'{func_a["type"]} {func_a["name"]} is not implemented in this contract')
             exit(1)
     return True

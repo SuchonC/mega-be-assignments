@@ -1,6 +1,7 @@
 from web3 import exceptions as web3_exceptions
 from utils.common import get_contract_object
 
+
 def get_contract_detail(contract_address):
     contract_address = contract_address.lower()
     contract = get_contract_object(contract_address)
@@ -21,7 +22,7 @@ def get_contract_detail(contract_address):
         decimals = None
 
     return {
-        'name': name,
+        'name': name if name is not None else symbol,
         'symbol': symbol,
         'decimals': decimals
     }
